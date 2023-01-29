@@ -7,7 +7,7 @@
     "lib": "lib"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/Gizem03/team_profile_generator#readme",
   "dependencies": {
-    "inquirer": "^9.1.4",
+    "inquirer": "^9.1.4"
+  },
+  "devDependencies": {
     "jest": "^29.4.1"
   }
 }

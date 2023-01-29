@@ -12,4 +12,4 @@ const render = require("./src/page-template.js"); */
 
 console.log("hello world");
 
-// TODO: Write Code to gather information about the development team members, and render the HTML file.
+// TODO: Write Code ton gather information about the development team members, and render the HTML file.
