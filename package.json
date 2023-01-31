@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/Gizem03/team_profile_generator#readme",
   "dependencies": {
-    "inquirer": "^9.1.4"
+    "inquirer": "^8.2.5"
   },
   "devDependencies": {
     "jest": "^29.4.1"
