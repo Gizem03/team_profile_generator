@@ -10,20 +10,6 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./src/page-template.js");
 
-console.log("hello world");
-
-// TODO: Write Code to gather information about the development team members, and render the HTML file.
-
-/* const e = new Manager("Foo", 1, "test@test.com", 100);
-
-const array = [];
-
-array.push(e);
-
-const result = render(array);
-fs.mkdirSync(OUTPUT_DIR);
-fs.writeFileSync(outputPath, result); */
-
 const next_step_question = [
   {
     type: "list",
@@ -82,7 +68,7 @@ const questions_engineer = [
 const questions_intern = [
   {
     type: "input",
-    name: "inter_name",
+    name: "intern_name",
     message: "What is the intern's name?",
   },
   {
@@ -112,24 +98,75 @@ function writeTeam() {
   fs.writeFileSync(outputPath, result);
 }
 
-// TODO write a function like init, that asks next step questions -
-// TODO write a function that asks engineer questions
-// TODO write a function that asks intern questions - each question should ask the next step question finally
-
 function init() {
   inquirer
     .prompt(questions_manager)
     .then((answers) => {
-      console.log(answers);
       const manager = new Manager(
         answers.manager_name,
         answers.manager_id,
         answers.manager_email,
-        manager_office_number
+        answers.manager_office_number
       );
       team.push(manager);
-      writeTeam();
-      // call next step questions here instead of write team
+
+      nextStep();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function askEngineer() {
+  inquirer
+    .prompt(questions_engineer)
+    .then((answers) => {
+      const engineer = new Engineer(
+        answers.engineer_name,
+        answers.engineer_id,
+        answers.engineer_email,
+        answers.engineer_github_username
+      );
+      team.push(engineer);
+
+      nextStep();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function askIntern() {
+  inquirer
+    .prompt(questions_intern)
+    .then((answers) => {
+      const intern = new Intern(
+        answers.intern_name,
+        answers.intern_id,
+        answers.intern_email,
+        answers.intern_school
+      );
+      team.push(intern);
+
+      nextStep();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function nextStep() {
+  inquirer
+    .prompt(next_step_question)
+    .then((answers) => {
+      switch (answers.next_step) {
+        case "Add an engineer":
+          return askEngineer();
+        case "Add an intern":
+          return askIntern();
+        case "Finish building the team":
+          return writeTeam();
+      }
     })
     .catch((error) => {
       console.error(error);
